@@ -31,7 +31,12 @@ app.use('/api', route);
 app.get('/', (req,res,next) => {
   res.send("Hello!");
 });
-
+app.get('/home.html', (req, res) => {
+  res.sendFile(__dirname+'/'+'home.html');
+});
+app.get('/index.html', (req, res) => {
+  res.sendFile(__dirname+'/'+'index.html');
+});
 
 app.listen(port, () => {
   console.log("Server started at port :"+port);

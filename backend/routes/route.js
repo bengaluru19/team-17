@@ -20,19 +20,20 @@ router.get('/surveys/:id',(req,res,next) => {
   });
 });
 
-router.post('/addsurvey',async (req,res,next) => {
+router.get('/addsurvey', async (req,res,next) => {
   let newUser = new User({
     _id: new mongoose.Types.ObjectId(),
-    name: req.body.name,
-    email_id: req.body.email_id,
-    phone: req.body.phone,
-    budget:req.body.budget,
-    location: req.body.location,
-    organization: req.body.organization,
-    area: req.body.area,
-    specialreq: req.body.specialreq,
-    snake: req.body.snake
+    name: req.query.name,
+    email_id: req.query.email_id,
+    phone: req.query.phone,
+    budget:req.query.budget,
+    location: req.query.location,
+    organization: req.query.organization,
+    area: req.query.area,
+    specialreq: req.query.specialreq,
+    snake: req.query.snake
   });
+
   let mailOptions = {}
   if(newUser.snake=="No"){
     if(newUser.budget>5000){
@@ -45,7 +46,7 @@ router.post('/addsurvey',async (req,res,next) => {
           attachments: [{filename: 'text1.txt',content:"Template 1"}]
         }
       flag = 1;
-      res.send("Template1");
+      res.send("Thank you for registering with us, we have sent you an email.");
     }
     else{
       mailOptions = {
@@ -56,11 +57,11 @@ router.post('/addsurvey',async (req,res,next) => {
           attachments: [{filename: 'text2.txt',content:"Template 2"}]
         }
       flag = 2;
-      res.send("Template2");
+      res.send("Thank you for registering with us, we have sent you an email.");
     }
   }
   else{
-    res.send("YES");
+    res.send(newUser.name);
   }
 
   let transporter = nodemailer.createTransport({
