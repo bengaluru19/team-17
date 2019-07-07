@@ -43,7 +43,7 @@ router.get('/addsurvey', async (req,res,next) => {
           to: newUser.email_id,
           subject: 'Thank You',
           text: 'Template1',
-          attachments: [{filename: 'text1.txt',content:"Template 1"}]
+          attachments: [{filename: 'text1.txt',content:"Swings : 10, Monkey bars : 5, Slides: 3 "}]
         }
       flag = 1;
       res.send("Thank you for registering with us, we have sent you an email.");
@@ -54,14 +54,21 @@ router.get('/addsurvey', async (req,res,next) => {
           to: newUser.email_id,
           subject: 'Thank You',
           text: 'Template2',
-          attachments: [{filename: 'text2.txt',content:"Template 2"}]
+          attachments: [{filename: 'text2.txt',content:"Swings : 20, Monkey bars : 7, Slides: 2 "}]
         }
       flag = 2;
       res.send("Thank you for registering with us, we have sent you an email.");
     }
   }
   else{
-    res.send(newUser.name);
+    mailOptions = {
+        from: 'anthilltest12345@gmail.com',
+        to: newUser.email_id,
+        subject: 'Thank You',
+        text: 'Template3',
+        attachments: [{filename: 'text3.txt',content:"Swings : 15, Monkey bars : 4, Slides: 1 "}]
+      }
+    res.send("Thank you for registering with us, we have sent you an email.");
   }
 
   let transporter = nodemailer.createTransport({
